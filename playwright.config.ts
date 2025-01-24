@@ -1,7 +1,7 @@
 import { PlaywrightTestConfig } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
-    timeout: 60000,
+    timeout: 50000,
     retries: 0, //retry failing test
     use: {
         headless: true, // true signfiei ..
