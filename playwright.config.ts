@@ -3,13 +3,13 @@ import { PlaywrightTestConfig } from "@playwright/test";
 const config: PlaywrightTestConfig = {
     timeout: 50000,
     retries: 0, //retry failing test
-    reporter: [['html']],
+    reporter: [['list']],
     use: {
-        headless: true, // true signfiei ..
+        headless: false, 
         actionTimeout: 15000,
         ignoreHTTPSErrors: true,
-        video: "off", 
-        screenshot: "off",
+        video: "retain-on-failure", 
+        screenshot: "only-on-failure",
     },
     projects: [
         {
