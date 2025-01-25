@@ -35,7 +35,7 @@ test('Selectors', async ({page}) => {
 })
 */
 
-test.describe("My first test suite", () => {
+test.describe.parallel.only("My first test suite", () => {
 
     test("Working with Input", async ({page}) => {
         await page.goto('http://zero.webappsecurity.com/index.html')
@@ -69,14 +69,15 @@ test.describe("Hooks", () => {
         test('Screenshoots', async ({page}) => {
             await page.screenshot({path: "screenshoot.png", fullPage: true})
         })
-        
         test('Single element screenshoot', async ({page}) => {
             const element = await page.locator('h1')
             await element.screenshot({path: "single_element_screenshoot.png"})
         })
+
 })
 
 test('Custom helpers', async ({ page }) => {
-    await loadHomePage(page);  // Charge la page
-    await assertTitle(page);   // Vérifie le titre
+    await loadHomePage(page);
+    // await page.pause()
+    await assertTitle(page);
 });
