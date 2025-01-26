@@ -1,33 +1,28 @@
 import {test,expect} from '@playwright/test'
+import { FeedbackPage } from '../../pages-objects/FeedbackPage'
+import { HomePage } from '../../pages-objects/HomePage'
 
-test.describe("Feedback Form", () => {
+test.describe.only("Feedback Form", () => {
+    let homePage : HomePage
+    let feedbackPage : FeedbackPage
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('http://zero.webappsecurity.com/index.html')
-    await page.locator('#feedback').click()
+    homePage = new HomePage(page)
+    feedbackPage = new FeedbackPage(page)
+    await homePage.visit()
+    await homePage.clickOnFeedbackLink()
   })
 
         test('Reset feedback form', async ({ page }) => {
-            await page.fill('#name', 'some name')
-            await page.fill('#email', 'some email@email.com')
-            await page.fill('#subject', 'some subject')
-            await page.fill('#comment', 'some nice comment about the application')
-            await page.click("input[name='clear']")
-        
-            const nameInput = await page.locator('#name')
-            const commentInput = await page.locator('#comment')
-            await expect(nameInput).toBeEmpty()
-            await expect(commentInput).toBeEmpty()
+            await feedbackPage.fillForm("name", "email@gmail.com", "subject", "message")
+            await feedbackPage.resetForm()
+            await feedbackPage.assertResset()
         })
         
-        // Submit feedback form
         test('Submit feedback form', async ({ page }) => {
-            await page.fill('#name', 'some name')
-            await page.fill('#email', 'some email@email.com')
-            await page.fill('#subject', 'some subject')
-            await page.fill('#comment', 'some nice comment about the application')
-            await page.click("input[type='submit']")
-            await page.waitForSelector('#feedback-title')
+            await feedbackPage.fillForm("name", "email@gmail.com", "subject", "message")
+            await feedbackPage.submitForm()
+            await feedbackPage.feedbackFormSent()
         })
   
 })
