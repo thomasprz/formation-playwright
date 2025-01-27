@@ -1,8 +1,8 @@
-import {test,expect} from '@playwright/test'
+import {test} from '@playwright/test'
 import { FeedbackPage } from '../../pages-objects/FeedbackPage'
 import { HomePage } from '../../pages-objects/HomePage'
 
-test.describe.only("Feedback Form", () => {
+test.describe("Feedback Form", () => {
     let homePage : HomePage
     let feedbackPage : FeedbackPage
 
@@ -24,5 +24,4 @@ test.beforeEach(async ({ page }) => {
             await feedbackPage.submitForm()
             await feedbackPage.feedbackFormSent()
         })
-  
 })
