@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test'
 import { LoginPage } from '../../pages-objects/loginPage'
 import { HomePage } from '../../pages-objects/HomePage' // Importer la page object
 
-test.describe.parallel("Login/Logout Flow", () => {
+test.describe("Login/Logout Flow", () => {
     let loginPage: LoginPage // Création d'une variable pour la page object
     let homePage : HomePage
 
@@ -15,7 +15,8 @@ test.describe.parallel("Login/Logout Flow", () => {
     test('Negative Scenario for login', async ({ page }) => {
         await homePage.clickOnSignIn()
         await loginPage.login('invalid username', 'invalid password')
-        await loginPage.assertErrorMessage()
+        await loginPage.wait(3000)
+        await expect(loginPage.errorMessage).toContainText('Login and/or password are wrong')
     })
     
     test('Positive Scenario for login', async ({ page }) => {
