@@ -2,7 +2,7 @@ import { PlaywrightTestConfig } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
     timeout: 50000,
-    retries: 0, //retry failing test
+    retries: 0,
     testDir: 'tests/e2e',
     reporter: [['list']],
     use: {
